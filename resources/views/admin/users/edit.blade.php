@@ -31,6 +31,16 @@
                 <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
+                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password">
+                @if($errors->has('password'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('password') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
                     <input type="hidden" name="approved" value="0">
                     <input class="form-check-input" type="checkbox" name="approved" id="approved" value="1" {{ $user->approved || old('approved', 0) === 1 ? 'checked' : '' }}>
@@ -44,14 +54,19 @@
                 <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password">
-                @if($errors->has('password'))
+                <label>{{ trans('cruds.user.fields.level') }}</label>
+                <select class="form-control {{ $errors->has('level') ? 'is-invalid' : '' }}" name="level" id="level">
+                    <option value disabled {{ old('level', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\User::LEVEL_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('level', $user->level) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('level'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('password') }}
+                        {{ $errors->first('level') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.user.fields.level_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
