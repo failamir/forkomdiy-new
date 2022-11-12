@@ -20,6 +20,16 @@
                 <span class="help-block">{{ trans('cruds.dataLembaga.fields.nama_lembaga_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="singkatan">{{ trans('cruds.dataLembaga.fields.singkatan') }}</label>
+                <input class="form-control {{ $errors->has('singkatan') ? 'is-invalid' : '' }}" type="text" name="singkatan" id="singkatan" value="{{ old('singkatan', '') }}">
+                @if($errors->has('singkatan'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('singkatan') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.dataLembaga.fields.singkatan_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="ketua_id">{{ trans('cruds.dataLembaga.fields.ketua') }}</label>
                 <select class="form-control select2 {{ $errors->has('ketua') ? 'is-invalid' : '' }}" name="ketua_id" id="ketua_id">
                     @foreach($ketuas as $id => $entry)

@@ -33,6 +33,9 @@
                             {{ trans('cruds.dataLembaga.fields.nama_lembaga') }}
                         </th>
                         <th>
+                            {{ trans('cruds.dataLembaga.fields.singkatan') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.dataLembaga.fields.ketua') }}
                         </th>
                         <th>
@@ -84,6 +87,9 @@
                             </td>
                             <td>
                                 {{ $dataLembaga->nama_lembaga ?? '' }}
+                            </td>
+                            <td>
+                                {{ $dataLembaga->singkatan ?? '' }}
                             </td>
                             <td>
                                 {{ $dataLembaga->ketua->name ?? '' }}

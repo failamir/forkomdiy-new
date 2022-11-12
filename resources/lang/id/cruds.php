@@ -122,7 +122,7 @@ return [
             'id'                         => 'ID',
             'id_helper'                  => ' ',
             'nama_lembaga'               => 'Nama Lembaga',
-            'nama_lembaga_helper'        => 'Nama singkatan dan nama panjang',
+            'nama_lembaga_helper'        => 'Dewan Perwakilan Rakyat',
             'website'                    => 'Website',
             'website_helper'             => ' ',
             'email'                      => 'Email',
@@ -153,6 +153,8 @@ return [
             'perizinan_helper'           => ' ',
             'provinsi'                   => 'Provinsi',
             'provinsi_helper'            => ' ',
+            'singkatan'                  => 'Singkatan',
+            'singkatan_helper'           => 'DPR',
         ],
     ],
     'dataKerjaSama' => [

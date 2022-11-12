@@ -11,6 +11,7 @@ class CreateDataLembagasTable extends Migration
         Schema::create('data_lembagas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_lembaga')->nullable();
+            $table->string('singkatan')->nullable();
             $table->string('sekretariat_wilayah')->nullable();
             $table->string('website')->nullable();
             $table->string('email')->nullable();
