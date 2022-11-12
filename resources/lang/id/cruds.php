@@ -67,6 +67,8 @@ return [
             'team_helper'              => ' ',
             'approved'                 => 'Approved',
             'approved_helper'          => ' ',
+            'level'                    => 'Level',
+            'level_helper'             => ' ',
         ],
     ],
     'team' => [

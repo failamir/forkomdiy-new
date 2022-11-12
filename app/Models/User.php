@@ -20,6 +20,13 @@ class User extends Authenticatable
     use Notifiable;
     use HasFactory;
 
+    public const LEVEL_SELECT = [
+        'Admin'   => 'Admin',
+        'Daerah'  => 'Daerah',
+        'Cabang'  => 'Cabang',
+        'Ranting' => 'Ranting',
+    ];
+
     public $table = 'users';
 
     protected $hidden = [
@@ -38,10 +45,11 @@ class User extends Authenticatable
         'name',
         'email',
         'email_verified_at',
-        'approved',
         'password',
+        'approved',
         'remember_token',
         'created_at',
+        'level',
         'updated_at',
         'deleted_at',
         'team_id',
