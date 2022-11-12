@@ -59,7 +59,7 @@ class KontakController extends Controller
     {
         abort_if(Gate::denies('kontak_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $kontak->load('team');
+        $kontak->load('team', 'kontakKetuas');
 
         return view('admin.kontaks.show', compact('kontak'));
     }

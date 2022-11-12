@@ -301,6 +301,8 @@ return [
             'deleted_at_helper' => ' ',
             'team'              => 'Team',
             'team_helper'       => ' ',
+            'kontak'            => 'Kontak',
+            'kontak_helper'     => ' ',
         ],
     ],
     'regency' => [
