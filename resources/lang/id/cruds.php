@@ -291,7 +291,7 @@ return [
             'id_helper'         => ' ',
             'periode'           => 'Periode',
             'periode_helper'    => ' ',
-            'name'              => 'Nama Ketua',
+            'name'              => 'Name',
             'name_helper'       => ' ',
             'created_at'        => 'Created at',
             'created_at_helper' => ' ',
