@@ -11,18 +11,57 @@ use App\Models\Village;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class VillagesController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('village_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $villages = Village::all();
+        if ($request->ajax()) {
+            $query = Village::query()->select(sprintf('%s.*', (new Village())->table));
+            $table = Datatables::of($query);
 
-        return view('admin.villages.index', compact('villages'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate = 'village_show';
+                $editGate = 'village_edit';
+                $deleteGate = 'village_delete';
+                $crudRoutePart = 'villages';
+
+                return view('partials.datatablesActions', compact(
+                'viewGate',
+                'editGate',
+                'deleteGate',
+                'crudRoutePart',
+                'row'
+            ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('id_district', function ($row) {
+                return $row->id_district ? $row->id_district : '';
+            });
+            $table->editColumn('id_village', function ($row) {
+                return $row->id_village ? $row->id_village : '';
+            });
+            $table->editColumn('village_name', function ($row) {
+                return $row->village_name ? $row->village_name : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.villages.index');
     }
 
     public function create()

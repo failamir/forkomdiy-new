@@ -11,18 +11,57 @@ use App\Models\Regency;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class RegenciesController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('regency_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $regencies = Regency::all();
+        if ($request->ajax()) {
+            $query = Regency::query()->select(sprintf('%s.*', (new Regency())->table));
+            $table = Datatables::of($query);
 
-        return view('admin.regencies.index', compact('regencies'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate = 'regency_show';
+                $editGate = 'regency_edit';
+                $deleteGate = 'regency_delete';
+                $crudRoutePart = 'regencies';
+
+                return view('partials.datatablesActions', compact(
+                'viewGate',
+                'editGate',
+                'deleteGate',
+                'crudRoutePart',
+                'row'
+            ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('id_province', function ($row) {
+                return $row->id_province ? $row->id_province : '';
+            });
+            $table->editColumn('id_regency', function ($row) {
+                return $row->id_regency ? $row->id_regency : '';
+            });
+            $table->editColumn('regency_name', function ($row) {
+                return $row->regency_name ? $row->regency_name : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.regencies.index');
     }
 
     public function create()
