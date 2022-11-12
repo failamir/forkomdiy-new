@@ -20,6 +20,20 @@
                 <span class="help-block">{{ trans('cruds.ketua.fields.periode_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="kontak_id">{{ trans('cruds.ketua.fields.kontak') }}</label>
+                <select class="form-control select2 {{ $errors->has('kontak') ? 'is-invalid' : '' }}" name="kontak_id" id="kontak_id">
+                    @foreach($kontaks as $id => $entry)
+                        <option value="{{ $id }}" {{ old('kontak_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('kontak'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('kontak') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.ketua.fields.kontak_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="name">{{ trans('cruds.ketua.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}">
                 @if($errors->has('name'))

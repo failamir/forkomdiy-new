@@ -17,7 +17,7 @@ class KetuaApiController extends Controller
     {
         abort_if(Gate::denies('ketua_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new KetuaResource(Ketua::with(['team'])->get());
+        return new KetuaResource(Ketua::with(['kontak', 'team'])->get());
     }
 
     public function store(StoreKetuaRequest $request)
@@ -33,7 +33,7 @@ class KetuaApiController extends Controller
     {
         abort_if(Gate::denies('ketua_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new KetuaResource($ketua->load(['team']));
+        return new KetuaResource($ketua->load(['kontak', 'team']));
     }
 
     public function update(UpdateKetuaRequest $request, Ketua $ketua)

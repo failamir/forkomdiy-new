@@ -24,6 +24,7 @@ class Ketua extends Model
 
     protected $fillable = [
         'periode',
+        'kontak_id',
         'name',
         'created_at',
         'updated_at',
@@ -34,6 +35,11 @@ class Ketua extends Model
     public function ketuaDataLembagas()
     {
         return $this->hasMany(DataLembaga::class, 'ketua_id', 'id');
+    }
+
+    public function kontak()
+    {
+        return $this->belongsTo(Kontak::class, 'kontak_id');
     }
 
     public function team()
