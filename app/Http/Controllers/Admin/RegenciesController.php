@@ -9,6 +9,7 @@ use App\Http\Requests\StoreRegencyRequest;
 use App\Http\Requests\UpdateRegencyRequest;
 use App\Models\Regency;
 use Gate;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -62,6 +63,15 @@ class RegenciesController extends Controller
         }
 
         return view('admin.regencies.index');
+    }
+
+    function add_ajax_kab($id_prov){
+        $query = DB::table('regencies')->where('id_province',$id_prov)->get();
+        $data = "<option value=''>Pilih Kabupaten</option>";
+        foreach ($query as $value) {
+            $data .= "<option value='".$value->id_regency."'>".$value->regency_name."</option>";
+        }
+        echo $data;
     }
 
     public function create()

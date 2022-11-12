@@ -81,24 +81,28 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Regencies
     Route::delete('regencies/destroy', 'RegenciesController@massDestroy')->name('regencies.massDestroy');
+    Route::get('wilayah/add_ajax_kab/{id}', 'RegenciesController@add_ajax_kab')->name('regencies.add_ajax_kab');
     Route::post('regencies/parse-csv-import', 'RegenciesController@parseCsvImport')->name('regencies.parseCsvImport');
     Route::post('regencies/process-csv-import', 'RegenciesController@processCsvImport')->name('regencies.processCsvImport');
     Route::resource('regencies', 'RegenciesController');
 
     // Districts
     Route::delete('districts/destroy', 'DistrictsController@massDestroy')->name('districts.massDestroy');
+    Route::get('wilayah/add_ajax_kec/{id}', 'DistrictsController@add_ajax_kec')->name('districts.add_ajax_kec');
     Route::post('districts/parse-csv-import', 'DistrictsController@parseCsvImport')->name('districts.parseCsvImport');
     Route::post('districts/process-csv-import', 'DistrictsController@processCsvImport')->name('districts.processCsvImport');
     Route::resource('districts', 'DistrictsController');
 
     // Villages
     Route::delete('villages/destroy', 'VillagesController@massDestroy')->name('villages.massDestroy');
+    Route::get('wilayah/add_ajax_des/{id}', 'VillagesController@add_ajax_des')->name('villages.add_ajax_des');
     Route::post('villages/parse-csv-import', 'VillagesController@parseCsvImport')->name('villages.parseCsvImport');
     Route::post('villages/process-csv-import', 'VillagesController@processCsvImport')->name('villages.processCsvImport');
     Route::resource('villages', 'VillagesController');
 
     // Provinces
     Route::delete('provinces/destroy', 'ProvincesController@massDestroy')->name('provinces.massDestroy');
+    Route::get('wilayah/add_ajax_pro', 'ProvincesController@add_ajax_pro')->name('provinces.add_ajax_pro');
     Route::post('provinces/parse-csv-import', 'ProvincesController@parseCsvImport')->name('provinces.parseCsvImport');
     Route::post('provinces/process-csv-import', 'ProvincesController@processCsvImport')->name('provinces.processCsvImport');
     Route::resource('provinces', 'ProvincesController');

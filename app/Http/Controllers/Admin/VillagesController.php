@@ -9,6 +9,7 @@ use App\Http\Requests\StoreVillageRequest;
 use App\Http\Requests\UpdateVillageRequest;
 use App\Models\Village;
 use Gate;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -62,6 +63,15 @@ class VillagesController extends Controller
         }
 
         return view('admin.villages.index');
+    }
+
+    function add_ajax_des($id_kec){
+        $query = DB::table('villages')->where('id_district',$id_kec)->get();
+        $data = "<option value=''>Pilih Desa</option>";
+        foreach ($query as $value) {
+            $data .= "<option value='".$value->id."'>".$value->village_name."</option>";
+        }
+        echo $data;
     }
 
     public function create()

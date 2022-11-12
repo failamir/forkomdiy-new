@@ -10,18 +10,22 @@
         <form method="POST" action="{{ route("admin.data-cabangs.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
-                <select class="form-control select2 {{ $errors->has('district') ? 'is-invalid' : '' }}" name="district_id" id="district_id">
-                    @foreach($districts as $id => $entry)
-                        <option value="{{ $id }}" {{ old('district_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
+                <label for="regency_id">{{ 'Provinsi' }}</label>
+                <select name="prov" class="form-control" id="provinsi">
+                    <option>Pilih Provinsi</option>
                 </select>
-                @if($errors->has('district'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('district') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.dataCabang.fields.district_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="regency_id">{{ trans('cruds.dataDaerah.fields.regency') }}</label>
+                <select name="regency_id" class="form-control" id="kabupaten">
+                    <option value=''>Pilih Kabupaten</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
+                <select name="district_id" class="form-control" id="kecamatan">
+                    <option>Pilih Kecamatan</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="nama_ketua">{{ trans('cruds.dataCabang.fields.nama_ketua') }}</label>
@@ -133,5 +137,41 @@ Dropzone.options.lampiranDropzone = {
          return _results
      }
 }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $("#provinsi").ready(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_pro');?>";
+            $('#provinsi').load(url);
+            return false;
+        })
+
+        $("#kabupaten").ready(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kab');?>/"+34;
+            $('#kabupaten').load(url);
+            return false;
+        })
+
+        $("#provinsi").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kab');?>/"+$(this).val();
+            $('#kabupaten').load(url);
+            console.log($(this).val());
+            return false;
+        })
+        
+        $("#kabupaten").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kec');?>/"+$(this).val();
+            $('#kecamatan').load(url);
+            console.log($(this).val());
+            return false;
+        })
+        
+        $("#kecamatan").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_des');?>/"+$(this).val();
+            $('#desa').load(url);
+            return false;
+        })
+    });
 </script>
 @endsection

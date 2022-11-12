@@ -9,6 +9,7 @@ use App\Http\Requests\MassDestroyDataDaerahRequest;
 use App\Http\Requests\StoreDataDaerahRequest;
 use App\Http\Requests\UpdateDataDaerahRequest;
 use App\Models\DataDaerah;
+use App\Models\Province;
 use App\Models\Regency;
 use Gate;
 use Illuminate\Http\Request;
@@ -25,7 +26,8 @@ class DataDaerahController extends Controller
         abort_if(Gate::denies('data_daerah_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])->get();
-
+        // $dataDaerahs['provinsi'] = Province::all();
+        // var_dump($dataDaerahs);die;
         return view('admin.dataDaerahs.index', compact('dataDaerahs'));
     }
 
@@ -34,7 +36,8 @@ class DataDaerahController extends Controller
         abort_if(Gate::denies('data_daerah_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $regencies = Regency::pluck('regency_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
+        // $provinsi = Province::all();
+        // var_dump($regencies);die;
         return view('admin.dataDaerahs.create', compact('regencies'));
     }
 

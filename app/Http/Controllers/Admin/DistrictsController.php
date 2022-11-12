@@ -9,6 +9,7 @@ use App\Http\Requests\StoreDistrictRequest;
 use App\Http\Requests\UpdateDistrictRequest;
 use App\Models\District;
 use Gate;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -64,6 +65,15 @@ class DistrictsController extends Controller
         return view('admin.districts.index');
     }
 
+    function add_ajax_kec($id_kab){
+        $query = DB::table('districts')->where('id_regency',$id_kab)->get();
+        $data = "<option value=''>Pilih Kecamatan</option>";
+        foreach ($query as $value) {
+            $data .= "<option value='".$value->id_district."'>".$value->district_name."</option>";
+        }
+        echo $data;
+    }
+
     public function create()
     {
         abort_if(Gate::denies('district_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -117,3 +127,4 @@ class DistrictsController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }
+

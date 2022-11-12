@@ -66,7 +66,7 @@
         </div>
         <div class="form-group">
             <label for="name">{{ trans('cruds.ketua.fields.name') }}</label>
-            <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name"
+            <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="ketua_name"
                 id="name" value="{{ old('name', '') }}">
             @if ($errors->has('name'))
                 <div class="invalid-feedback">

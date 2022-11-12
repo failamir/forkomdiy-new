@@ -25,6 +25,17 @@ class ProvincesController extends Controller
         return view('admin.provinces.index', compact('provinces'));
     }
 
+    function add_ajax_pro(){
+        $query = Province::all();
+        $data = "<option value=''>Pilih Provinsi</option>";
+        foreach ($query as $value) {
+            if($value->id_province == 34){
+                $data .= "<option value='".$value->id_province."' selected>".$value->province_name."</option>";}else{
+            $data .= "<option value='".$value->id_province."'>".$value->province_name."</option>";}
+        }
+        echo $data;
+    }
+
     public function create()
     {
         abort_if(Gate::denies('province_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
