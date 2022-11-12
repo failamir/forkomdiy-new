@@ -50,6 +50,8 @@
         Jika belum ada di list, Tambah <button type="button" class="btn btn-success" onclick="myFunction()">disini</button>
     
     <div id="myDIV" style="display: none;" class="drop-shadow-lg">
+        <br>
+        <br>
         <hr>
         <div class="form-group">
             <label for="periode">{{ trans('cruds.ketua.fields.periode') }}</label>
@@ -75,6 +77,8 @@
         </div>
         <hr>
     </div>
+    <br>
+    <br>
     <script>
         function myFunction() {
             var x = document.getElementById("myDIV");
