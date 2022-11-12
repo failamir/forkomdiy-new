@@ -38,6 +38,9 @@
                             {{ trans('cruds.user.fields.approved') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.level') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
                         <th>
@@ -66,6 +69,9 @@
                             <td>
                                 <span style="display:none">{{ $user->approved ?? '' }}</span>
                                 <input type="checkbox" disabled="disabled" {{ $user->approved ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                {{ App\Models\User::LEVEL_SELECT[$user->level] ?? '' }}
                             </td>
                             <td>
                                 @foreach($user->roles as $key => $item)
@@ -144,7 +150,7 @@
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 10,
   });
   let table = $('.datatable-User:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){

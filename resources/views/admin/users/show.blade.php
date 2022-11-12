@@ -57,6 +57,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.level') }}
+                        </th>
+                        <td>
+                            {{ App\Models\User::LEVEL_SELECT[$user->level] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
                         <td>
