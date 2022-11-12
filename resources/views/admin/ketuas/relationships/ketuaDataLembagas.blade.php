@@ -64,9 +64,6 @@
                             {{ trans('cruds.dataLembaga.fields.provinsi') }}
                         </th>
                         <th>
-                            {{ trans('cruds.province.fields.province_name') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -119,9 +116,6 @@
                                         {{ trans('global.view_file') }}
                                     </a>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $dataLembaga->provinsi->province_name ?? '' }}
                             </td>
                             <td>
                                 {{ $dataLembaga->provinsi->province_name ?? '' }}
