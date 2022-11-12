@@ -21,6 +21,10 @@ class StoreDataLembagaRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'singkatan' => [
+                'string',
+                'nullable',
+            ],
             'sekretariat_wilayah' => [
                 'string',
                 'nullable',

@@ -33,6 +33,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.dataLembaga.fields.singkatan') }}
+                        </th>
+                        <td>
+                            {{ $dataLembaga->singkatan }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.dataLembaga.fields.ketua') }}
                         </th>
                         <td>

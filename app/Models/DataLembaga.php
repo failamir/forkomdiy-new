@@ -32,6 +32,7 @@ class DataLembaga extends Model implements HasMedia
 
     protected $fillable = [
         'nama_lembaga',
+        'singkatan',
         'ketua_id',
         'sekretariat_wilayah',
         'website',
