@@ -36,6 +36,11 @@ class Kontak extends Model
         'team_id',
     ];
 
+    public function kontakKetuas()
+    {
+        return $this->hasMany(Ketua::class, 'kontak_id', 'id');
+    }
+
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');

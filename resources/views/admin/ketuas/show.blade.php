@@ -33,6 +33,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.ketua.fields.kontak') }}
+                        </th>
+                        <td>
+                            {{ $ketua->kontak->contact_first_name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.ketua.fields.name') }}
                         </th>
                         <td>

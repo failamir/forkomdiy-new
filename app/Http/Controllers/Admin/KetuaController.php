@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyKetuaRequest;
 use App\Http\Requests\StoreKetuaRequest;
 use App\Http\Requests\UpdateKetuaRequest;
 use App\Models\Ketua;
+use App\Models\Kontak;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class KetuaController extends Controller
     {
         abort_if(Gate::denies('ketua_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $ketuas = Ketua::with(['team'])->get();
+        $ketuas = Ketua::with(['kontak', 'team'])->get();
 
         return view('admin.ketuas.index', compact('ketuas'));
     }
@@ -29,7 +30,9 @@ class KetuaController extends Controller
     {
         abort_if(Gate::denies('ketua_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.ketuas.create');
+        $kontaks = Kontak::pluck('contact_first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.ketuas.create', compact('kontaks'));
     }
 
     public function store(StoreKetuaRequest $request)
@@ -43,9 +46,11 @@ class KetuaController extends Controller
     {
         abort_if(Gate::denies('ketua_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $ketua->load('team');
+        $kontaks = Kontak::pluck('contact_first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.ketuas.edit', compact('ketua'));
+        $ketua->load('kontak', 'team');
+
+        return view('admin.ketuas.edit', compact('ketua', 'kontaks'));
     }
 
     public function update(UpdateKetuaRequest $request, Ketua $ketua)
@@ -59,7 +64,7 @@ class KetuaController extends Controller
     {
         abort_if(Gate::denies('ketua_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $ketua->load('team', 'ketuaDataLembagas');
+        $ketua->load('kontak', 'team', 'ketuaDataLembagas');
 
         return view('admin.ketuas.show', compact('ketua'));
     }
