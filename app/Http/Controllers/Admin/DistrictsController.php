@@ -11,18 +11,57 @@ use App\Models\District;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class DistrictsController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('district_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $districts = District::all();
+        if ($request->ajax()) {
+            $query = District::query()->select(sprintf('%s.*', (new District())->table));
+            $table = Datatables::of($query);
 
-        return view('admin.districts.index', compact('districts'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate = 'district_show';
+                $editGate = 'district_edit';
+                $deleteGate = 'district_delete';
+                $crudRoutePart = 'districts';
+
+                return view('partials.datatablesActions', compact(
+                'viewGate',
+                'editGate',
+                'deleteGate',
+                'crudRoutePart',
+                'row'
+            ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('id_regency', function ($row) {
+                return $row->id_regency ? $row->id_regency : '';
+            });
+            $table->editColumn('id_district', function ($row) {
+                return $row->id_district ? $row->id_district : '';
+            });
+            $table->editColumn('district_name', function ($row) {
+                return $row->district_name ? $row->district_name : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.districts.index');
     }
 
     public function create()
