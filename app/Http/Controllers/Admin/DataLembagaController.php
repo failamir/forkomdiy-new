@@ -10,6 +10,7 @@ use App\Http\Requests\StoreDataLembagaRequest;
 use App\Http\Requests\UpdateDataLembagaRequest;
 use App\Models\DataLembaga;
 use App\Models\Ketua;
+use App\Models\Kontak;
 use App\Models\Perizinan;
 use App\Models\Province;
 use Gate;
@@ -46,8 +47,17 @@ class DataLembagaController extends Controller
 
     public function store(StoreDataLembagaRequest $request)
     {
+        $values = array('id' => 0,'contact_first_name' => $request->ketua_name);
+        $contact= Kontak::create($values);
+        
+        $values = array('id' => 0,'kontak_id' => $contact->id,'periode' => $request->periode,'name' => $request->ketua_name);
+        $anis = Ketua::create($values);
+        
+        
+        // var_dump($request->ketua_id);die;
         $dataLembaga = DataLembaga::create($request->all());
-
+        $dataLembaga->ketua_id = $anis->id;
+        $dataLembaga->save();
         foreach ($request->input('lampiran', []) as $file) {
             $dataLembaga->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('lampiran');
         }
