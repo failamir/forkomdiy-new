@@ -9,10 +9,10 @@
                 {{ trans('global.add') }} {{ trans('cruds.dataLembaga.title_singular') }}
             </a>
             @endif
-            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+            {{-- <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                 {{ trans('global.app_csvImport') }}
             </button>
-            @include('csvImport.modal', ['model' => 'DataLembaga', 'route' => 'admin.data-lembagas.parseCsvImport'])
+            @include('csvImport.modal', ['model' => 'DataLembaga', 'route' => 'admin.data-lembagas.parseCsvImport']) --}}
         </div>
     </div>
 @endcan
