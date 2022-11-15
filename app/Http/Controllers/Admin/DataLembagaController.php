@@ -47,6 +47,10 @@ class DataLembagaController extends Controller
 
     public function store(StoreDataLembagaRequest $request)
     {
+        $dataLembaga = DataLembaga::all();
+        if($dataLembaga->count() < 1){
+            // $dataLembaga = DataLembaga::first();
+            // $dataLembaga->update($request->all());
         $values = array('id' => 0,'contact_first_name' => $request->ketua_name);
         $contact= Kontak::create($values);
         
@@ -67,6 +71,11 @@ class DataLembagaController extends Controller
         }
 
         return redirect()->route('admin.data-lembagas.index');
+    }else{
+        echo "<center><h1>Hanya bisa membuat satu data Lembaga</h1></center>";
+        sleep(5);
+        return redirect()->route('admin.data-lembagas.index');
+    }
     }
 
     public function edit(DataLembaga $dataLembaga)

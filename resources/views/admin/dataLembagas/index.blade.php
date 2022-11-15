@@ -2,10 +2,13 @@
 @section('content')
 @can('data_lembaga_create')
     <div style="margin-bottom: 10px;" class="row">
+        {{-- @dump($dataLembagas) --}}
         <div class="col-lg-12">
+            @if(count($dataLembagas) == 0)
             <a class="btn btn-success" href="{{ route('admin.data-lembagas.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.dataLembaga.title_singular') }}
             </a>
+            @endif
             <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                 {{ trans('global.app_csvImport') }}
             </button>

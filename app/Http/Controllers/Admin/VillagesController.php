@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyVillageRequest;
 use App\Http\Requests\StoreVillageRequest;
 use App\Http\Requests\UpdateVillageRequest;
+use App\Models\District;
 use App\Models\Village;
 use Gate;
 use Illuminate\Support\Facades\DB;
@@ -66,7 +67,8 @@ class VillagesController extends Controller
     }
 
     function add_ajax_des($id_kec){
-        $query = DB::table('villages')->where('id_district',$id_kec)->get();
+        $id_kec = District::find($id_kec);
+        $query = DB::table('villages')->where('id_district',$id_kec->id_district)->get();
         $data = "<option value=''>Pilih Desa</option>";
         foreach ($query as $value) {
             $data .= "<option value='".$value->id."'>".$value->village_name."</option>";

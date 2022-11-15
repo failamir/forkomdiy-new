@@ -60,6 +60,7 @@
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     @can('data_daerah_access')
+                    @if(Auth::user()->level == 'Admin' || Auth::user()->level == 'Daerah' )
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.data-daerahs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-daerahs") || request()->is("admin/data-daerahs/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fas fa-align-justify c-sidebar-nav-icon">
@@ -68,8 +69,10 @@
                                 {{ trans('cruds.dataDaerah.title') }}
                             </a>
                         </li>
+                    @endif
                     @endcan
                     @can('data_cabang_access')
+                    @if(Auth::user()->level == 'Admin' || Auth::user()->level == 'Daerah' || Auth::user()->level == 'Cabang' )
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.data-cabangs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-cabangs") || request()->is("admin/data-cabangs/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fas fa-arrows-alt-v c-sidebar-nav-icon">
@@ -78,8 +81,10 @@
                                 {{ trans('cruds.dataCabang.title') }}
                             </a>
                         </li>
+                    @endif
                     @endcan
                     @can('data_ranting_access')
+                    @if(Auth::user()->level == 'Admin' || Auth::user()->level == 'Daerah' || Auth::user()->level == 'Cabang' || Auth::user()->level == 'Ranting' )
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.data-rantings.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-rantings") || request()->is("admin/data-rantings/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fas fa-asterisk c-sidebar-nav-icon">
@@ -88,6 +93,7 @@
                                 {{ trans('cruds.dataRanting.title') }}
                             </a>
                         </li>
+                    @endif
                     @endcan
                 </ul>
             </li>

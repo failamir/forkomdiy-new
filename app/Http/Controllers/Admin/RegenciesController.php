@@ -69,7 +69,7 @@ class RegenciesController extends Controller
         $query = DB::table('regencies')->where('id_province',$id_prov)->get();
         $data = "<option value=''>Pilih Kabupaten</option>";
         foreach ($query as $value) {
-            $data .= "<option value='".$value->id_regency."'>".$value->regency_name."</option>";
+            $data .= "<option value='".$value->id."'>".$value->regency_name."</option>";
         }
         echo $data;
     }

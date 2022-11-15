@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyDistrictRequest;
 use App\Http\Requests\StoreDistrictRequest;
 use App\Http\Requests\UpdateDistrictRequest;
 use App\Models\District;
+use App\Models\Regency;
 use Gate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -66,10 +67,11 @@ class DistrictsController extends Controller
     }
 
     function add_ajax_kec($id_kab){
-        $query = DB::table('districts')->where('id_regency',$id_kab)->get();
+        $id_kab = Regency::find($id_kab);
+        $query = DB::table('districts')->where('id_regency',$id_kab->id_regency)->get();
         $data = "<option value=''>Pilih Kecamatan</option>";
         foreach ($query as $value) {
-            $data .= "<option value='".$value->id_district."'>".$value->district_name."</option>";
+            $data .= "<option value='".$value->id."'>".$value->district_name."</option>";
         }
         echo $data;
     }
