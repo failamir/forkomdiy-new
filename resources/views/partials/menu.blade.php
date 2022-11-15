@@ -60,6 +60,7 @@
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     @can('data_daerah_access')
+                    {{-- @dump(Auth::user()->level) --}}
                     @if(Auth::user()->level == 'Admin' || Auth::user()->level == 'Daerah' )
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.data-daerahs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-daerahs") || request()->is("admin/data-daerahs/*") ? "c-active" : "" }}">
