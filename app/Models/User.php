@@ -21,7 +21,7 @@ class User extends Authenticatable
     use HasFactory;
 
     public const LEVEL_SELECT = [
-        'Admin'   => 'Admin',
+        'Wilayah'   => 'Wilayah',
         'Daerah'  => 'Daerah',
         'Cabang'  => 'Cabang',
         'Ranting' => 'Ranting',
