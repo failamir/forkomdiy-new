@@ -68,6 +68,30 @@
                 <span class="help-block">{{ trans('cruds.user.fields.level_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="regency_id">{{ 'Provinsi' }}</label>
+                <select name="prov" class="form-control" id="provinsi">
+                    <option>Pilih Provinsi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="regency_id">{{ trans('cruds.dataDaerah.fields.regency') }}</label>
+                <select name="regency_id" class="form-control" id="kabupaten">
+                    <option value=''>Pilih Kabupaten</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
+                <select name="district_id" class="form-control" id="kecamatan">
+                    <option>Pilih Kecamatan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="village_id">{{ trans('cruds.dataRanting.fields.village') }}</label>
+                <select name="village_id" class="form-control" id="desa">
+                    <option>Pilih Desa</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
