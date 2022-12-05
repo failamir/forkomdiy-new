@@ -5,7 +5,7 @@ namespace App\Models;
 use \DateTimeInterface;
 use App\Notifications\VerifyUserNotification;
 use Carbon\Carbon;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +21,7 @@ class User extends Authenticatable
     use HasFactory;
 
     public const LEVEL_SELECT = [
+        'Admin'   => 'Admin',
         'Wilayah'   => 'Wilayah',
         'Daerah'  => 'Daerah',
         'Cabang'  => 'Cabang',
@@ -53,6 +54,10 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at',
         'team_id',
+        'prov',
+        'regency_id',
+        'district_id',
+        'village_id',
     ];
 
     public function __construct(array $attributes = [])

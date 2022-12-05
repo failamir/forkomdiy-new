@@ -72,8 +72,8 @@ return [
         ],
     ],
     'team' => [
-        'title'          => 'Teams',
-        'title_singular' => 'Team',
+        'title'          => 'Lembaga',
+        'title_singular' => 'Lembaga',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',

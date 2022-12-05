@@ -35,6 +35,18 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'array',
             ],
+            'prov' => [
+                'integer',
+            ],
+            'regency_id' => [
+                'integer',
+            ],
+            'distirct_id' => [
+                'integer',
+            ],
+            'village_id' => [
+                'integer',
+            ],
         ];
     }
 }

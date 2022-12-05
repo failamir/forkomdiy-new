@@ -132,6 +132,43 @@
     </div>
 </div>
 
+@endsection
 
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $("#provinsi").ready(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_pro');?>";
+            $('#provinsi').load(url);
+            return false;
+        })
 
+        $("#kabupaten").ready(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kab');?>/"+34;
+            $('#kabupaten').load(url);
+            return false;
+        })
+
+        $("#provinsi").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kab');?>/"+$(this).val();
+            $('#kabupaten').load(url);
+            console.log($(this).val());
+            return false;
+        })
+        
+        $("#kabupaten").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kec');?>/"+$(this).val();
+            $('#kecamatan').load(url);
+            console.log($(this).val());
+            return false;
+        })
+        
+        $("#kecamatan").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_des');?>/"+$(this).val();
+            $('#desa').load(url);
+            console.log($(this).val());
+            return false;
+        })
+    });
+</script>
 @endsection
