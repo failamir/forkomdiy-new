@@ -52,7 +52,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label>{{ trans('cruds.user.fields.level') }}</label>
                 <select class="form-control {{ $errors->has('level') ? 'is-invalid' : '' }}" name="level" id="level">
                     <option value disabled {{ old('level', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
@@ -66,11 +66,11 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.level_helper') }}</span>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="regency_id">{{ 'Provinsi' }}</label>
                 <select name="prov" class="form-control" id="provinsi">
-                    <option>Pilih Provinsi</option>
+                    <option value=''>Pilih Provinsi</option>
                 </select>
             </div>
             <div class="form-group">
@@ -82,13 +82,13 @@
             <div class="form-group">
                 <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
                 <select name="district_id" class="form-control" id="kecamatan">
-                    <option>Pilih Kecamatan</option>
+                    <option value=''>Pilih Kecamatan</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="village_id">{{ trans('cruds.dataRanting.fields.village') }}</label>
                 <select name="village_id" class="form-control" id="desa">
-                    <option>Pilih Desa</option>
+                    <option value=''>Pilih Desa</option>
                 </select>
             </div>
             <div class="form-group">

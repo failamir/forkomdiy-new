@@ -37,15 +37,19 @@ class StoreUserRequest extends FormRequest
             ],
             'prov' => [
                 'integer',
+                'nullable',
             ],
             'regency_id' => [
                 'integer',
+                'nullable',
             ],
-            'distirct_id' => [
+            'district_id' => [
                 'integer',
+                'nullable',
             ],
             'village_id' => [
                 'integer',
+                'nullable',
             ],
         ];
     }

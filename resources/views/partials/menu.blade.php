@@ -1,3 +1,6 @@
+@php $id_user = Auth::user()->roles->pluck('id')[0];
+// var_dump($id_user);die;
+@endphp
 <div id="sidebar" class="c-sidebar c-sidebar-fixed c-sidebar-lg-show">
 
     <div class="c-sidebar-brand d-md-down-none">
@@ -31,6 +34,7 @@
             </li>
         @endcan
         @can('data_lembaga_access')
+        @if($id_user == 1 || $id_user == 2)
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.data-lembagas.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-lembagas") || request()->is("admin/data-lembagas/*") ? "c-active" : "" }}">
                     <i class="fa-fw fas fa-atlas c-sidebar-nav-icon">
@@ -39,6 +43,7 @@
                     {{ trans('cruds.dataLembaga.title') }}
                 </a>
             </li>
+        @endif
         @endcan
         @can('data_kerja_sama_access')
             <li class="c-sidebar-nav-item">
@@ -60,8 +65,8 @@
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     @can('data_daerah_access')
-                    {{-- @dump(Auth::user()->level) --}}
-                    @if(Auth::user()->level == 'Wilayah' || Auth::user()->level == 'Daerah' )
+                    
+                    @if($id_user == 1 || $id_user == 2 || $id_user == 3)
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.data-daerahs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-daerahs") || request()->is("admin/data-daerahs/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fas fa-align-justify c-sidebar-nav-icon">
@@ -73,7 +78,7 @@
                     @endif
                     @endcan
                     @can('data_cabang_access')
-                    @if(Auth::user()->level == 'Wilayah' || Auth::user()->level == 'Daerah' || Auth::user()->level == 'Cabang' )
+                    @if($id_user == 1 || $id_user == 2 || $id_user == 3 || $id_user == 4)
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.data-cabangs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-cabangs") || request()->is("admin/data-cabangs/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fas fa-arrows-alt-v c-sidebar-nav-icon">
@@ -85,7 +90,7 @@
                     @endif
                     @endcan
                     @can('data_ranting_access')
-                    @if(Auth::user()->level == 'Wilayah' || Auth::user()->level == 'Daerah' || Auth::user()->level == 'Cabang' || Auth::user()->level == 'Ranting' )
+                    @if($id_user == 1 || $id_user == 2 || $id_user == 3 || $id_user == 4 || $id_user == 5)
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.data-rantings.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/data-rantings") || request()->is("admin/data-rantings/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fas fa-asterisk c-sidebar-nav-icon">

@@ -3,9 +3,13 @@
 @can('data_daerah_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
+            @if(empty($dataCabangs))
+            {{-- @if(count($dataCabangs) == 0) --}}
             <a class="btn btn-success" href="{{ route('admin.data-daerahs.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.dataDaerah.title_singular') }}
             </a>
+            {{-- @endif --}}
+            @endif
             <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                 {{ trans('global.app_csvImport') }}
             </button>

@@ -53,7 +53,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label>{{ trans('cruds.user.fields.level') }}</label>
                 <select class="form-control {{ $errors->has('level') ? 'is-invalid' : '' }}" name="level" id="level">
                     <option value disabled {{ old('level', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
@@ -67,6 +67,30 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.level_helper') }}</span>
+            </div> --}}
+            <div class="form-group">
+                <label for="regency_id">{{ 'Provinsi' }}</label>
+                <select name="prov" class="form-control" id="provinsi">
+                    <option value=''>Pilih Provinsi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="regency_id">{{ trans('cruds.dataDaerah.fields.regency') }}</label>
+                <select name="regency_id" class="form-control" id="kabupaten">
+                    <option value=''>Pilih Kabupaten</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
+                <select name="district_id" class="form-control" id="kecamatan">
+                    <option value=''>Pilih Kecamatan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="village_id">{{ trans('cruds.dataRanting.fields.village') }}</label>
+                <select name="village_id" class="form-control" id="desa">
+                    <option value=''>Pilih Desa</option>
+                </select>
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
@@ -111,4 +135,43 @@
 
 
 
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $("#provinsi").ready(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_pro');?>";
+            $('#provinsi').load(url);
+            return false;
+        })
+
+        $("#kabupaten").ready(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kab');?>/"+34;
+            $('#kabupaten').load(url);
+            return false;
+        })
+
+        $("#provinsi").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kab');?>/"+$(this).val();
+            $('#kabupaten').load(url);
+            console.log($(this).val());
+            return false;
+        })
+        
+        $("#kabupaten").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_kec');?>/"+$(this).val();
+            $('#kecamatan').load(url);
+            console.log($(this).val());
+            return false;
+        })
+        
+        $("#kecamatan").change(function (){
+            var url = "<?php echo url('admin/wilayah/add_ajax_des');?>/"+$(this).val();
+            $('#desa').load(url);
+            console.log($(this).val());
+            return false;
+        })
+    });
+</script>
 @endsection

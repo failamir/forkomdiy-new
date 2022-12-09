@@ -37,9 +37,9 @@
                         <th>
                             {{ trans('cruds.user.fields.approved') }}
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.user.fields.level') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
@@ -70,9 +70,9 @@
                                 <span style="display:none">{{ $user->approved ?? '' }}</span>
                                 <input type="checkbox" disabled="disabled" {{ $user->approved ? 'checked' : '' }}>
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ App\Models\User::LEVEL_SELECT[$user->level] ?? '' }}
-                            </td>
+                            </td> --}}
                             <td>
                                 @foreach($user->roles as $key => $item)
                                     <span class="badge badge-info">{{ $item->title }}</span>

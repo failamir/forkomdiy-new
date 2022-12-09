@@ -32,6 +32,22 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'array',
             ],
+            'prov' => [
+                'integer',
+                'nullable',
+            ],
+            'regency_id' => [
+                'integer',
+                'nullable',
+            ],
+            'district_id' => [
+                'integer',
+                'nullable',
+            ],
+            'village_id' => [
+                'integer',
+                'nullable',
+            ],
         ];
     }
 }
