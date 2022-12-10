@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateKetuaRequest;
 use App\Models\Ketua;
 use App\Models\Kontak;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,7 +22,13 @@ class KetuaController extends Controller
     {
         abort_if(Gate::denies('ketua_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $ketuas = Ketua::with(['kontak', 'team'])->get();
+        $ketuas = Ketua::with(['kontak', 'team'])
+        ->where('level_id',Auth::user()->roles->pluck('id')[0])
+        ->where('prov', Auth::user()->prov)
+        ->where('regency_id', Auth::user()->regency_id)
+        ->where('district_id', Auth::user()->district_id)
+        ->where('village_id', Auth::user()->village_id)
+        ->get();
 
         return view('admin.ketuas.index', compact('ketuas'));
     }

@@ -9,6 +9,12 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.perizinans.store") }}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+            <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
+            <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
+            <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
+            <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
+            <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
             <div class="form-group">
                 <label for="instansi_penerbit">{{ trans('cruds.perizinan.fields.instansi_penerbit') }}</label>
                 <input class="form-control {{ $errors->has('instansi_penerbit') ? 'is-invalid' : '' }}" type="text" name="instansi_penerbit" id="instansi_penerbit" value="{{ old('instansi_penerbit', '') }}">

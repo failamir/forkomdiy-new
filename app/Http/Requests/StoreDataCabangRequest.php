@@ -34,6 +34,30 @@ class StoreDataCabangRequest extends FormRequest
             'lampiran' => [
                 'array',
             ],
+            'level_id' => [
+                'integer',
+                'nullable',
+            ],
+            'prov' => [
+                'string',
+                'nullable',
+            ],
+            'regency_id' => [
+                'integer',
+                'nullable',
+            ],
+            'district_id' => [
+                'integer',
+                'nullable',
+            ],
+            'village_id' => [
+                'integer',
+                'nullable',
+            ],
+            'user_id' => [
+                'integer',
+                'nullable',
+            ],
         ];
     }
 }

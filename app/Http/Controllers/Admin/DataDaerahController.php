@@ -12,6 +12,7 @@ use App\Models\DataDaerah;
 use App\Models\Province;
 use App\Models\Regency;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,8 +27,18 @@ class DataDaerahController extends Controller
         abort_if(Gate::denies('data_daerah_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])->get();
-        // $dataDaerahs['provinsi'] = Province::all();
-        // var_dump($dataDaerahs);die;
+        if (Auth::user()->roles->pluck('id')[0] < 3) {
+            $dataDaerahs = DataDaerah::with(['district', 'team', 'media'])
+                ->get();
+        } else {
+            $dataDaerahs = DataDaerah::with(['district', 'team', 'media'])
+                ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                ->where('prov', Auth::user()->prov)
+                ->where('regency_id', Auth::user()->regency_id)
+                ->where('district_id', Auth::user()->district_id)
+                ->where('village_id', Auth::user()->village_id)
+                ->get();
+        }
         return view('admin.dataDaerahs.index', compact('dataDaerahs'));
     }
 

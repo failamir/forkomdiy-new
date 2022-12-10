@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ trans('panel.site_title') }}</title>
+    <title>{{ trans('panel.site_title') }} | {{Auth::user()->email}}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" />
@@ -64,11 +64,18 @@
                   <svg class="c-icon">
                     <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-list-rich"></use>
                   </svg></a></li>
-              <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="/profile/password">
-                {{ 'email : '.Auth::user()->email . ' Level : ' . Auth::user()->roles->pluck('title')[0] }}  
+              <li class="c-header-nav-item d-md-down-none mx-2">
+                {{-- <a class="c-header-nav-link" href="#"> --}}
+                 @if(Auth::user()->roles->pluck('title')[0] == 'Admin')
+                 {!! 'email : <b>'.Auth::user()->email . '</b> | Level : <b>' . Auth::user()->roles->pluck('title')[0] . '</b>'!!}  
+                @else
+                {!! 'email : <b>'.Auth::user()->email . '</b> | Level : <b>' . Auth::user()->roles->pluck('title')[0] . '</b> | Team : <b>' . Auth::user()->team->name . '</b>'!!}  
+                @endif
                 <svg class="c-icon">
                     <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-envelope-open"></use>
-                  </svg></a></li>
+                  </svg>
+                {{-- </a> --}}
+              </li>
               <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <div class="c-avatar"><img class="c-avatar-img" src="https://i.pravatar.cc/300" alt="user@email.com"></div>
                 </a>

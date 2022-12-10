@@ -46,6 +46,12 @@ class DataKerjaSama extends Model implements HasMedia
         'updated_at',
         'deleted_at',
         'team_id',
+        'level_id',
+        'prov',
+        'regency_id',
+        'district_id',
+        'village_id',
+        'user_id'
     ];
 
     public function registerMediaConversions(Media $media = null): void

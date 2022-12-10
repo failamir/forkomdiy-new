@@ -9,6 +9,12 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.data-rantings.store") }}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+            <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
+            <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
+            <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
+            <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
+            <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
             <div class="form-group">
                 <label for="regency_id">{{ 'Provinsi' }}</label>
                 <select name="prov" class="form-control" id="provinsi">

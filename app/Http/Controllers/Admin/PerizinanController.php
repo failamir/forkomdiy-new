@@ -11,6 +11,7 @@ use App\Http\Requests\UpdatePerizinanRequest;
 use App\Models\Perizinan;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,7 +24,13 @@ class PerizinanController extends Controller
     {
         abort_if(Gate::denies('perizinan_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $perizinans = Perizinan::with(['team', 'media'])->get();
+        $perizinans = Perizinan::with(['team', 'media'])
+        ->where('level_id',Auth::user()->roles->pluck('id')[0])
+        ->where('prov', Auth::user()->prov)
+        ->where('regency_id', Auth::user()->regency_id)
+        ->where('district_id', Auth::user()->district_id)
+        ->where('village_id', Auth::user()->village_id)
+        ->get();
 
         return view('admin.perizinans.index', compact('perizinans'));
     }

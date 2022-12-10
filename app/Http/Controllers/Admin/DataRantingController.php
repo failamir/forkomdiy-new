@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateDataRantingRequest;
 use App\Models\DataRanting;
 use App\Models\Village;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,8 +24,18 @@ class DataRantingController extends Controller
     public function index()
     {
         abort_if(Gate::denies('data_ranting_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        if (Auth::user()->roles->pluck('id')[0] < 5) {
+            $dataRantings = DataRanting::with(['village', 'team', 'media'])->get();
+        } else {
+            $dataRantings = DataRanting::with(['village', 'team', 'media'])
+                ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                ->where('prov', Auth::user()->prov)
+                ->where('regency_id', Auth::user()->regency_id)
+                ->where('district_id', Auth::user()->district_id)
+                ->where('village_id', Auth::user()->village_id)
+                ->get();
+        }
 
-        $dataRantings = DataRanting::with(['village', 'team', 'media'])->get();
 
         return view('admin.dataRantings.index', compact('dataRantings'));
     }

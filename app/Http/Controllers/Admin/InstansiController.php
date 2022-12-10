@@ -9,6 +9,7 @@ use App\Http\Requests\StoreInstansiRequest;
 use App\Http\Requests\UpdateInstansiRequest;
 use App\Models\Instansi;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +21,13 @@ class InstansiController extends Controller
     {
         abort_if(Gate::denies('instansi_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $instansis = Instansi::with(['team'])->get();
+        $instansis = Instansi::with(['team'])
+        ->where('level_id',Auth::user()->roles->pluck('id')[0])
+        ->where('prov', Auth::user()->prov)
+        ->where('regency_id', Auth::user()->regency_id)
+        ->where('district_id', Auth::user()->district_id)
+        ->where('village_id', Auth::user()->village_id)
+        ->get();
 
         return view('admin.instansis.index', compact('instansis'));
     }

@@ -3,9 +3,14 @@
 @can('data_ranting_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
+            @if(Auth::user()->roles->pluck('id')[0] == 5)
+            {{-- @dump($dataRantings) --}}
+            @if(count($dataRantings) == 0)
             <a class="btn btn-success" href="{{ route('admin.data-rantings.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.dataRanting.title_singular') }}
             </a>
+            @endif
+            @endif
             <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                 {{ trans('global.app_csvImport') }}
             </button>

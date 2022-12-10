@@ -9,6 +9,12 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.kontaks.store") }}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+            <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
+            <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
+            <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
+            <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
+            <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
             <div class="form-group">
                 <label for="contact_first_name">{{ trans('cruds.kontak.fields.contact_first_name') }}</label>
                 <input class="form-control {{ $errors->has('contact_first_name') ? 'is-invalid' : '' }}" type="text" name="contact_first_name" id="contact_first_name" value="{{ old('contact_first_name', '') }}">

@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateDataKerjaSamaRequest;
 use App\Models\DataKerjaSama;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,7 +24,13 @@ class DataKerjaSamaController extends Controller
     {
         abort_if(Gate::denies('data_kerja_sama_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataKerjaSamas = DataKerjaSama::with(['team', 'media'])->get();
+        $dataKerjaSamas = DataKerjaSama::with(['team', 'media'])
+        ->where('level_id',Auth::user()->roles->pluck('id')[0])
+        ->where('prov', Auth::user()->prov)
+        ->where('regency_id', Auth::user()->regency_id)
+        ->where('district_id', Auth::user()->district_id)
+        ->where('village_id', Auth::user()->village_id)
+        ->get();
 
         return view('admin.dataKerjaSamas.index', compact('dataKerjaSamas'));
     }

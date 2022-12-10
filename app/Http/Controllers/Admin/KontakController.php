@@ -9,6 +9,7 @@ use App\Http\Requests\StoreKontakRequest;
 use App\Http\Requests\UpdateKontakRequest;
 use App\Models\Kontak;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +21,13 @@ class KontakController extends Controller
     {
         abort_if(Gate::denies('kontak_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $kontaks = Kontak::with(['team'])->get();
+        $kontaks = Kontak::with(['team'])
+        ->where('level_id',Auth::user()->roles->pluck('id')[0])
+        ->where('prov', Auth::user()->prov)
+        ->where('regency_id', Auth::user()->regency_id)
+        ->where('district_id', Auth::user()->district_id)
+        ->where('village_id', Auth::user()->village_id)
+        ->get();
 
         return view('admin.kontaks.index', compact('kontaks'));
     }

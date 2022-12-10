@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateDataCabangRequest;
 use App\Models\DataCabang;
 use App\Models\District;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,9 +24,18 @@ class DataCabangController extends Controller
     public function index()
     {
         abort_if(Gate::denies('data_cabang_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $dataCabangs = DataCabang::with(['district', 'team', 'media'])->get();
-
+        if (Auth::user()->roles->pluck('id')[0] < 4) {
+            $dataCabangs = DataCabang::with(['district', 'team', 'media'])
+                ->get();
+        } else {
+            $dataCabangs = DataCabang::with(['district', 'team', 'media'])
+                ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                ->where('prov', Auth::user()->prov)
+                ->where('regency_id', Auth::user()->regency_id)
+                ->where('district_id', Auth::user()->district_id)
+                ->where('village_id', Auth::user()->village_id)
+                ->get();
+        }
         return view('admin.dataCabangs.index', compact('dataCabangs'));
     }
 

@@ -9,6 +9,12 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.ketuas.store") }}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+            <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
+            <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
+            <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
+            <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
+            <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
             <div class="form-group">
                 <label for="periode">{{ trans('cruds.ketua.fields.periode') }}</label>
                 <input class="form-control {{ $errors->has('periode') ? 'is-invalid' : '' }}" type="text" name="periode" id="periode" value="{{ old('periode', '') }}">
