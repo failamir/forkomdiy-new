@@ -27,7 +27,7 @@ class DataDaerahController extends Controller
         abort_if(Gate::denies('data_daerah_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])->get();
-        if (Auth::user()->roles->pluck('id')[0] < 3) {
+        if (Auth::user()->roles->pluck('id')[0] <= 3) {
             $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])
                 ->get();
         } else {
