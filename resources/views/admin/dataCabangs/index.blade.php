@@ -3,11 +3,21 @@
     @can('data_cabang_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                @if (count($dataCabangs) == 0)
+                {{-- @if (count($dataCabangs) == 0) --}}
+                @if(empty($dataCabangs)  && Auth::user()->regency_id == 4 )
                     <a class="btn btn-success" href="{{ route('admin.data-cabangs.create') }}">
                         {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
                     </a>
+                @elseif(Auth::user()->id == 1)
+                <a class="btn btn-success" href="{{ route('admin.data-cabangs.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
+                </a>
+                @elseif( Auth::user()->regency_id == 3 )
+                <a class="btn btn-success" href="{{ route('admin.data-cabangs.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
+                </a>
                 @endif
+
                 <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                     {{ trans('global.app_csvImport') }}
                 </button>
