@@ -24,12 +24,27 @@ class DataCabangController extends Controller
     public function index()
     {
         abort_if(Gate::denies('data_cabang_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        if (Auth::user()->roles->pluck('id')[0] < 4) {
+        if (Auth::user()->roles->pluck('id')[0] == 1) {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
             // where('level_id', Auth::user()->roles->pluck('id')[0])
             // ->where('prov', Auth::user()->prov)
-            ->where('district_id', Auth::user()->district_id)
+            // ->where('district_id', Auth::user()->district_id)
             ->get();
+        } else if (Auth::user()->roles->pluck('id')[0] == 2) {
+            $dataCabangs = DataCabang::with(['district', 'team', 'media'])
+                // ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                // ->where('prov', Auth::user()->prov)
+                // ->where('regency_id', Auth::user()->regency_id)
+                // ->where('district_id', Auth::user()->district_id)
+                ->get();
+        } else if (Auth::user()->roles->pluck('id')[0] == 3) {
+            $dataCabangs = DataCabang::with(['district', 'team', 'media'])
+                // ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                // ->where('prov', Auth::user()->prov)
+                // ->where('regency_id', Auth::user()->regency_id)
+                ->where('regency_id', Auth::user()->regency_id)
+                // ->where('village_id', Auth::user()->village_id)
+                ->get();
         } else {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
                 ->where('level_id', Auth::user()->roles->pluck('id')[0])
