@@ -26,7 +26,10 @@ class DataCabangController extends Controller
         abort_if(Gate::denies('data_cabang_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         if (Auth::user()->roles->pluck('id')[0] < 4) {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
-                ->get();
+            // where('level_id', Auth::user()->roles->pluck('id')[0])
+            // ->where('prov', Auth::user()->prov)
+            ->where('regency_id', Auth::user()->regency_id)
+            ->get();
         } else {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
                 ->where('level_id', Auth::user()->roles->pluck('id')[0])
