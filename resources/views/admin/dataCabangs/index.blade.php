@@ -13,8 +13,8 @@
                     {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
                 </a>
                 @endif
-                {{ Auth::user()->regency_id }}
-                @if( Auth::user()->regency_id == 3 )
+                {{-- {{ Auth::user()->regency_id }} --}}
+                @if( Auth::user()->id == 3 )
                 <a class="btn btn-success" href="{{ route('admin.data-cabangs.create') }}">
                     {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
                 </a>
