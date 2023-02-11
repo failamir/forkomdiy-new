@@ -29,7 +29,8 @@ class DataDaerahController extends Controller
         $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])->get();
         if (Auth::user()->roles->pluck('id')[0] <= 3) {
             $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])
-                ->get();
+            ->where('regency_id', Auth::user()->regency_id)    
+            ->get();
         } else {
             $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])
                 ->where('level_id', Auth::user()->roles->pluck('id')[0])

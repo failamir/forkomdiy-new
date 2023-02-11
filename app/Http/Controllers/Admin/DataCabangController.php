@@ -28,7 +28,7 @@ class DataCabangController extends Controller
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
             // where('level_id', Auth::user()->roles->pluck('id')[0])
             // ->where('prov', Auth::user()->prov)
-            ->where('regency_id', Auth::user()->regency_id)
+            ->where('district_id', Auth::user()->district_id)
             ->get();
         } else {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
