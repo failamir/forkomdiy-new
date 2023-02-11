@@ -3,12 +3,12 @@
 @can('data_daerah_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            @if(empty($dataDaerahs)  && Auth::user()->regency_id == 3 )
+            @if(empty($dataDaerahs)  && Auth::user()->roles->pluck('id')[0] == 3 )
             {{-- @if(count($dataCabangs) == 0) --}}
             <a class="btn btn-success" href="{{ route('admin.data-daerahs.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.dataDaerah.title_singular') }}
             </a>
-            @elseif(Auth::user()->id == 1)
+            @elseif(Auth::user()->roles->pluck('id')[0] == 1)
             {{-- @endif --}}
             <a class="btn btn-success" href="{{ route('admin.data-daerahs.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.dataDaerah.title_singular') }}

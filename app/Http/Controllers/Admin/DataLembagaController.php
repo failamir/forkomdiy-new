@@ -28,6 +28,11 @@ class DataLembagaController extends Controller
     {
         abort_if(Gate::denies('data_lembaga_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        if(Auth::user()->roles->pluck('id')[0] == 1){
+            $dataLembagas = DataLembaga::with(['ketua', 'perizinan', 'provinsi', 'team', 'media'])
+            ->get();
+        }else{
+
         $dataLembagas = DataLembaga::with(['ketua', 'perizinan', 'provinsi', 'team', 'media'])
         ->where('level_id',Auth::user()->roles->pluck('id')[0])
         ->where('prov', Auth::user()->prov)
@@ -35,7 +40,7 @@ class DataLembagaController extends Controller
         ->where('district_id', Auth::user()->district_id)
         ->where('village_id', Auth::user()->village_id)
         ->get();
-
+        }
         return view('admin.dataLembagas.index', compact('dataLembagas'));
     }
 

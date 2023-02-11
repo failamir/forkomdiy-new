@@ -4,16 +4,16 @@
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 {{-- @if (count($dataCabangs) == 0) --}}
-                @if(empty($dataCabangs)  && Auth::user()->regency_id == 4 )
+                @if(empty($dataCabangs)  && Auth::user()->roles->pluck('id')[0] == 4 )
                     <a class="btn btn-success" href="{{ route('admin.data-cabangs.create') }}">
                         {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
                     </a>
-                @elseif(Auth::user()->id == 1)
+                @elseif(Auth::user()->roles->pluck('id')[0] == 1)
                 <a class="btn btn-success" href="{{ route('admin.data-cabangs.create') }}">
                     {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
                 </a>
                 @endif
-                {{ Auth::user()->level_id }}
+                
                 @if( Auth::user()->roles->pluck('id')[0] == 3 )
                 <a class="btn btn-success" href="{{ route('admin.data-cabangs.create') }}">
                     {{ trans('global.add') }} {{ trans('cruds.dataCabang.title_singular') }}
