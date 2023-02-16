@@ -48,6 +48,9 @@
                             {{ trans('cruds.perizinan.fields.berlaku_sampai') }}
                         </th>
                         <th>
+                            Lembaga
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -82,6 +85,9 @@
                             </td>
                             <td>
                                 {{ $perizinan->berlaku_sampai ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Team::where('id', $perizinan->team_id)->pluck('name')->first() ?? '' }}
                             </td>
                             <td>
                                 @can('perizinan_show')

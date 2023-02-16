@@ -42,6 +42,9 @@
                             {{ trans('cruds.instansi.fields.company_email') }}
                         </th>
                         <th>
+                            Lembaga
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -66,6 +69,9 @@
                             </td>
                             <td>
                                 {{ $instansi->company_email ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Team::where('id', $instansi->team_id)->pluck('name')->first() ?? ''}}
                             </td>
                             <td>
                                 @can('instansi_show')

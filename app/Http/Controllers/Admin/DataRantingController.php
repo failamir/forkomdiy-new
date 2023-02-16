@@ -26,11 +26,16 @@ class DataRantingController extends Controller
         abort_if(Gate::denies('data_ranting_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         if (Auth::user()->roles->pluck('id')[0] == 1) {
             $dataRantings = DataRanting::with(['village', 'team', 'media'])->get();
-        } elseif (Auth::user()->roles->pluck('id')[0] <= 5) {
+        } elseif (Auth::user()->roles->pluck('id')[0]== 2) {
             $dataRantings = DataRanting::with(['village', 'team', 'media'])
             ->orwhere('prov', Auth::user()->prov)   
-            ->orwhere('kab', Auth::user()->kab)    
-            ->orwhere('kec', Auth::user()->kec)
+            // ->orwhere('kab', Auth::user()->kab)    
+            // ->orwhere('kec', Auth::user()->kec)
+                ->get();
+        } elseif (Auth::user()->roles->pluck('id')[0] == 3) {
+            $dataRantings = DataRanting::with(['village', 'team', 'media'])
+                ->where('prov', Auth::user()->prov)
+                ->where('kab', Auth::user()->kab)
                 ->get();
         } else {
             $dataRantings = DataRanting::with(['village', 'team', 'media'])

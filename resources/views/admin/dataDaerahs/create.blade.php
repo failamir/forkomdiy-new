@@ -37,6 +37,49 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.dataDaerah.fields.nama_ketua_helper') }}</span>
             </div>
+            Jika belum ada di list, Tambah <button type="button" class="btn btn-success"
+                    onclick="myFunction()">disini</button>
+
+                <div id="myDIV" style="display: none;" class="drop-shadow-lg">
+                    <br>
+                    <br>
+                    <hr>
+                    <div class="form-group">
+                        <label for="periode">{{ trans('cruds.ketua.fields.periode') }}</label>
+                        <input class="form-control {{ $errors->has('periode') ? 'is-invalid' : '' }}" type="text"
+                            name="periode" id="periode" value="{{ old('periode', '') }}">
+                        @if ($errors->has('periode'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('periode') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.ketua.fields.periode_helper') }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">{{ trans('cruds.ketua.fields.name') }}</label>
+                        <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
+                            name="ketua_name" id="name" value="{{ old('name', '') }}">
+                        @if ($errors->has('name'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.ketua.fields.name_helper') }}</span>
+                    </div>
+                    <hr>
+                    <br>
+                    <br>
+                    <script>
+                        function myFunction() {
+                            var x = document.getElementById("myDIV");
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                            } else {
+                                x.style.display = "none";
+                            }
+                        }
+                    </script>
+                </div>
             <div class="form-group">
                 <label for="kontak_hp_wa">{{ trans('cruds.dataDaerah.fields.kontak_hp_wa') }}</label>
                 <input class="form-control {{ $errors->has('kontak_hp_wa') ? 'is-invalid' : '' }}" type="text" name="kontak_hp_wa" id="kontak_hp_wa" value="{{ old('kontak_hp_wa', '') }}">

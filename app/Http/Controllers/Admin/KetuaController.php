@@ -23,6 +23,10 @@ class KetuaController extends Controller
         abort_if(Gate::denies('ketua_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         if (Auth::user()->roles->pluck('id')[0] == 1) {
             $ketuas = Ketua::with(['kontak', 'team'])->get();
+        } elseif (Auth::user()->roles->pluck('id')[0] <= 5) {
+            $ketuas = Ketua::with(['kontak', 'team'])
+                ->where('team_id', Auth::user()->team->id)
+                ->get();
         }else{
         $ketuas = Ketua::with(['kontak', 'team'])
         ->where('level_id',Auth::user()->roles->pluck('id')[0])

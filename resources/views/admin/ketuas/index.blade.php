@@ -39,6 +39,9 @@
                             {{ trans('cruds.ketua.fields.name') }}
                         </th>
                         <th>
+                            Lembaga
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -60,6 +63,9 @@
                             </td>
                             <td>
                                 {{ $ketua->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Team::where('id', $ketua->team_id)->pluck('name')->first() ?? ''}}
                             </td>
                             <td>
                                 @can('ketua_show')

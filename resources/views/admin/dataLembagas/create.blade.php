@@ -83,19 +83,20 @@
                         <span class="help-block">{{ trans('cruds.ketua.fields.name_helper') }}</span>
                     </div>
                     <hr>
-                </div>
-                <br>
-                <br>
-                <script>
-                    function myFunction() {
-                        var x = document.getElementById("myDIV");
-                        if (x.style.display === "none") {
-                            x.style.display = "block";
-                        } else {
-                            x.style.display = "none";
+                    <br>
+                    <br>
+                    <script>
+                        function myFunction() {
+                            var x = document.getElementById("myDIV");
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                            } else {
+                                x.style.display = "none";
+                            }
                         }
-                    }
-                </script>
+                    </script>
+                </div>
+
                 <div class="form-group">
                     <label for="sekretariat_wilayah">{{ trans('cruds.dataLembaga.fields.sekretariat_wilayah') }}</label>
                     <input class="form-control {{ $errors->has('sekretariat_wilayah') ? 'is-invalid' : '' }}"

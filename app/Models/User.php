@@ -123,7 +123,7 @@ class User extends Authenticatable
         return $this->belongsTo(District::class, 'kec');
     }
 
-    public function desaa()
+    public function kelurahan()
     {
         return $this->belongsTo(Village::class, 'desa');
     }

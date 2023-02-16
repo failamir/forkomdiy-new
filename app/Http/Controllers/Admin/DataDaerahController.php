@@ -26,11 +26,17 @@ class DataDaerahController extends Controller
     {
         abort_if(Gate::denies('data_daerah_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         if (Auth::user()->roles->pluck('id')[0] == 1) {
-        $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])->get();
-        }else if (Auth::user()->roles->pluck('id')[0] <= 3) {
+            $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])->get();
+        } elseif (Auth::user()->roles->pluck('id')[0] == 2) {
             $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])
-            ->where('prov', Auth::user()->prov)    
-            ->get();
+                ->where('prov', Auth::user()->prov)
+                // ->where('kab', Auth::user()->kab)
+                ->get();
+        } elseif (Auth::user()->roles->pluck('id')[0] == 3) {
+            $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])
+                ->where('prov', Auth::user()->prov)
+                ->where('kab', Auth::user()->kab)
+                ->get();
         } else {
             $dataDaerahs = DataDaerah::with(['regency', 'team', 'media'])
                 ->where('level_id', Auth::user()->roles->pluck('id')[0])
@@ -129,10 +135,10 @@ class DataDaerahController extends Controller
     {
         abort_if(Gate::denies('data_daerah_create') && Gate::denies('data_daerah_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model         = new DataDaerah();
-        $model->id     = $request->input('crud_id', 0);
+        $model = new DataDaerah();
+        $model->id = $request->input('crud_id', 0);
         $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

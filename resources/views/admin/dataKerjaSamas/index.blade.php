@@ -60,6 +60,9 @@
                             {{ trans('cruds.dataKerjaSama.fields.nama_lembaga_kerjasama') }}
                         </th>
                         <th>
+                            Lembaga
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -106,6 +109,9 @@
                             </td>
                             <td>
                                 {{ $dataKerjaSama->nama_lembaga_kerjasama ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Team::where('id', $dataKerjaSama->team_id)->get()[0]['name'] }}
                             </td>
                             <td>
                                 @can('data_kerja_sama_show')

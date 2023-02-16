@@ -51,6 +51,9 @@
                             {{ trans('cruds.kontak.fields.contact_address') }}
                         </th>
                         <th>
+                            Lembaga
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -80,10 +83,13 @@
                                 {{ $kontak->contact_email ?? '' }}
                             </td>
                             <td>
-                                {{ $kontak->contact_skype ?? '' }}
+                                <a href="{{ $kontak->contact_skype ?? '' }}">View</a>
                             </td>
                             <td>
                                 {{ $kontak->contact_address ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Team::where('id', $kontak->team_id)->pluck('name')->first() ?? ''}}
                             </td>
                             <td>
                                 @can('kontak_show')

@@ -33,6 +33,11 @@ class Province extends Model
         return $this->hasMany(DataLembaga::class, 'provinsi_id', 'id');
     }
 
+    public function getname()
+    {
+        return $this->province_name;
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

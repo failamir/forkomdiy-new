@@ -23,6 +23,10 @@ class InstansiController extends Controller
 
         if (Auth::user()->roles->pluck('id')[0] == 1) {
             $instansis = Instansi::with(['team'])->get();
+        } elseif (Auth::user()->roles->pluck('id')[0] <= 5) {
+            $instansis = Instansi::with(['team'])
+                ->where('team_id', Auth::user()->team->id)
+                ->get();
         } else {
             $instansis = Instansi::with(['team'])
                 ->where('level_id', Auth::user()->roles->pluck('id')[0])

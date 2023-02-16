@@ -56,6 +56,9 @@
                                 {{ trans('cruds.dataCabang.fields.lampiran') }}
                             </th>
                             <th>
+                                Lembaga
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -87,6 +90,9 @@
                                             {{ trans('global.view_file') }}
                                         </a>
                                     @endforeach
+                                </td>
+                                <td>
+                                    {{ App\Models\Team::where('id', $dataCabang->team_id)->pluck('name')->first() ?? ''}}
                                 </td>
                                 <td>
                                     @can('data_cabang_show')
