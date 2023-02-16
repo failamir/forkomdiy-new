@@ -11,10 +11,10 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
-                <select class="form-control select2 {{ $errors->has('district') ? 'is-invalid' : '' }}" name="district_id" id="district_id">
+                <label for="kec">{{ trans('cruds.dataCabang.fields.district') }}</label>
+                <select class="form-control select2 {{ $errors->has('district') ? 'is-invalid' : '' }}" name="kec" id="kec">
                     @foreach($districts as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('district_id') ? old('district_id') : $dataCabang->district->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                        <option value="{{ $id }}" {{ (old('kec') ? old('kec') : $dataCabang->district->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('district'))

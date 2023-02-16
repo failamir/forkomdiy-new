@@ -69,26 +69,26 @@
                 <span class="help-block">{{ trans('cruds.user.fields.level_helper') }}</span>
             </div> --}}
             <div class="form-group">
-                <label for="regency_id">{{ 'Provinsi' }}</label>
+                <label for="kab">{{ 'Provinsi' }}</label>
                 <select name="prov" class="form-control" id="provinsi">
                     <option value=''>Pilih Provinsi</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="regency_id">{{ trans('cruds.dataDaerah.fields.regency') }}</label>
-                <select name="regency_id" class="form-control" id="kabupaten">
+                <label for="kab">{{ trans('cruds.dataDaerah.fields.regency') }}</label>
+                <select name="kab" class="form-control" id="kabupaten">
                     <option value=''>Pilih Kabupaten</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
-                <select name="district_id" class="form-control" id="kecamatan">
+                <label for="kec">{{ trans('cruds.dataCabang.fields.district') }}</label>
+                <select name="kec" class="form-control" id="kecamatan">
                     <option value=''>Pilih Kecamatan</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="village_id">{{ trans('cruds.dataRanting.fields.village') }}</label>
-                <select name="village_id" class="form-control" id="desa">
+                <label for="desa">{{ trans('cruds.dataRanting.fields.village') }}</label>
+                <select name="desa" class="form-control" id="desa">
                     <option value=''>Pilih Desa</option>
                 </select>
             </div>

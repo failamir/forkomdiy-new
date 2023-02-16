@@ -12,24 +12,24 @@
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
             <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
-            <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
-            <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
-            <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
+            <input type="hidden" name="kab" value="{{ Auth::user()->kab }}">
+            <input type="hidden" name="kec" value="{{ Auth::user()->kec }}">
+            <input type="hidden" name="desa" value="{{ Auth::user()->desa }}">
             <div class="form-group">
-                <label for="regency_id">{{ 'Provinsi' }}</label>
+                <label for="kab">{{ 'Provinsi' }}</label>
                 <select name="prov" class="form-control" id="provinsi">
                     <option>Pilih Provinsi</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="regency_id">{{ trans('cruds.dataDaerah.fields.regency') }}</label>
-                <select name="regency_id" class="form-control" id="kabupaten">
+                <label for="kab">{{ trans('cruds.dataDaerah.fields.regency') }}</label>
+                <select name="kab" class="form-control" id="kabupaten">
                     <option value=''>Pilih Kabupaten</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="district_id">{{ trans('cruds.dataCabang.fields.district') }}</label>
-                <select name="district_id" class="form-control" id="kecamatan">
+                <label for="kec">{{ trans('cruds.dataCabang.fields.district') }}</label>
+                <select name="kec" class="form-control" id="kecamatan">
                     <option>Pilih Kecamatan</option>
                 </select>
             </div>

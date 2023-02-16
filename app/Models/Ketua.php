@@ -32,9 +32,9 @@ class Ketua extends Model
         'team_id',
         'level_id',
         'prov',
-        'regency_id',
-        'district_id',
-        'village_id',
+        'kab',
+        'kec',
+        'desa',
         'user_id'
     ];
 

@@ -31,7 +31,7 @@ class DataRanting extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'village_id',
+        'desa',
         'nama_ketua',
         'kontak_hp_wa',
         'jumlah_anggota',
@@ -41,8 +41,8 @@ class DataRanting extends Model implements HasMedia
         'team_id',
         'level_id',
         'prov',
-        'regency_id',
-        'district_id',
+        'kab',
+        'kec',
         'user_id'
     ];
 
@@ -54,7 +54,7 @@ class DataRanting extends Model implements HasMedia
 
     public function village()
     {
-        return $this->belongsTo(Village::class, 'village_id');
+        return $this->belongsTo(Village::class, 'desa');
     }
 
     public function getLampiranAttribute()

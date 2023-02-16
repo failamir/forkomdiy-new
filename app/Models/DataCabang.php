@@ -31,7 +31,7 @@ class DataCabang extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'district_id',
+        'kec',
         'nama_ketua',
         'kontak_hp_wa',
         'jumlah_anggota',
@@ -41,8 +41,8 @@ class DataCabang extends Model implements HasMedia
         'team_id',
         'level_id',
         'prov',
-        'regency_id',
-        'village_id',
+        'kab',
+        'desa',
         'user_id'
     ];
 
@@ -54,7 +54,7 @@ class DataCabang extends Model implements HasMedia
 
     public function district()
     {
-        return $this->belongsTo(District::class, 'district_id');
+        return $this->belongsTo(District::class, 'kec');
     }
 
     public function getLampiranAttribute()

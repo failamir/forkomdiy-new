@@ -11,6 +11,7 @@ use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
@@ -18,8 +19,12 @@ class UsersController extends Controller
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $users = User::with(['roles', 'team'])->get();
+        if(Auth::id() == 1){
+            $users = User::with(['roles', 'team'])->get();
+        }else{
+            $users = User::with(['roles', 'team'])->where('team_id',  Auth::user()->team->id)->get();
+        }
+        // $users = User::with(['roles', 'team'])->get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -37,6 +42,11 @@ class UsersController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+        if(Auth::id() == 1){
+            // $request['team_id'] = 1;
+        }else{
+        $request['team_id'] = Auth::user()->team->id;
+        }
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
 

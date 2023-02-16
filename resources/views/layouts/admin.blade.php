@@ -71,15 +71,30 @@
                 @else
                 {!! 'email : <b>'.Auth::user()->email . '</b> | Level : <b>' . Auth::user()->roles->pluck('title')[0] . '</b> | Team : <b>' . Auth::user()->team->name . '</b>'!!}  
                 @endif
+                @if(isset(Auth::user()->prov))
+                {!! ' | Provinsi : <b>' . Auth::user()->prov . '</b>'!!}
+                @endif
+                {{-- @dump(Auth::user()) --}}
+                {{-- @if(isset(Auth::user()->kab))
+                {!! ' | Kabupaten : <b>' . Auth::user()->kab->regency_name . '</b>'!!}
+                @endif
+                @if(isset(Auth::user()->kec))
+                {!! ' | Kecamatan : <b>' . Auth::user()->kec->district_name . '</b>'!!}
+                @endif
+                @if(isset(Auth::user()->desa))
+                {!! ' | Desa : <b>' . Auth::user()->desa->village_name . '</b>'!!}
+                @endif --}}
                 <svg class="c-icon">
                     <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-envelope-open"></use>
                   </svg>
                 {{-- </a> --}}
               </li>
               <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  <div class="c-avatar"><img class="c-avatar-img" src="https://i.pravatar.cc/300" alt="user@email.com"></div>
+                  <div class="c-avatar">
+                    <img class="c-avatar-img" src="https://4.bp.blogspot.com/-QF8TyTD0ETI/XJ1bB9QluWI/AAAAAAAAGtk/nilxRIRSEwED0aDrt4nE-QRDitIjorhWACK4BGAYYCw/s120-pf/me.jpeg" alt="ifailamir@gmail.com"></div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right pt-0">
+                
+                {{-- <div class="dropdown-menu dropdown-menu-right pt-0">
                   <div class="dropdown-header bg-light py-2"><strong>Account</strong></div><a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
                       <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-bell"></use>
@@ -109,11 +124,23 @@
                   <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
                       <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-lock-locked"></use>
-                    </svg> Lock Account</a><a class="dropdown-item" href="/logout">
+                    </svg> Lock Account</a>
+                    <a class="dropdown-item">
+                      <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                     <svg class="c-icon mr-2">
                       <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-account-logout"></use>
                     </svg> Logout</a>
-                </div>
+                </div> --}}
+              </li>
+              <li>
+                <a href="#" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                  <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
+
+                  </i>
+                  
+              </a>
               </li>
             </ul>
         </header>

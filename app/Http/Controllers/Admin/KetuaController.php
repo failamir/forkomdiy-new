@@ -21,15 +21,17 @@ class KetuaController extends Controller
     public function index()
     {
         abort_if(Gate::denies('ketua_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        if (Auth::user()->roles->pluck('id')[0] == 1) {
+            $ketuas = Ketua::with(['kontak', 'team'])->get();
+        }else{
         $ketuas = Ketua::with(['kontak', 'team'])
         ->where('level_id',Auth::user()->roles->pluck('id')[0])
         ->where('prov', Auth::user()->prov)
-        ->where('regency_id', Auth::user()->regency_id)
-        ->where('district_id', Auth::user()->district_id)
-        ->where('village_id', Auth::user()->village_id)
+        ->where('kab', Auth::user()->kab)
+        ->where('kec', Auth::user()->kec)
+        ->where('desa', Auth::user()->desa)
         ->get();
-
+        }
         return view('admin.ketuas.index', compact('ketuas'));
     }
 

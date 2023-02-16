@@ -36,9 +36,9 @@ class DataLembagaController extends Controller
         $dataLembagas = DataLembaga::with(['ketua', 'perizinan', 'provinsi', 'team', 'media'])
         ->where('level_id',Auth::user()->roles->pluck('id')[0])
         ->where('prov', Auth::user()->prov)
-        ->where('regency_id', Auth::user()->regency_id)
-        ->where('district_id', Auth::user()->district_id)
-        ->where('village_id', Auth::user()->village_id)
+        ->where('kab', Auth::user()->kab)
+        ->where('kec', Auth::user()->kec)
+        ->where('desa', Auth::user()->desa)
         ->get();
         }
         return view('admin.dataLembagas.index', compact('dataLembagas'));

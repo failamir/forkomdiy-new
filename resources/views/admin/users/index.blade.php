@@ -44,6 +44,9 @@
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
                         <th>
+                            {{ trans('Team') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -79,6 +82,14 @@
                                 @endforeach
                             </td>
                             <td>
+                                {{$user->team->name}}
+                                {{-- Auth::user()->team->name --}}
+                                {{-- @foreach($user->team as $key)
+                                @dump($key) --}}
+                                    {{-- <span class="badge badge-info">{{ $key }}</span> --}}
+                                {{-- @endforeach --}}
+                            </td>
+                            <td>
                                 @can('user_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
                                         {{ trans('global.view') }}
@@ -109,7 +120,7 @@
     </div>
 </div>
 
-
+{{-- @dump(Auth::user()) --}}
 
 @endsection
 @section('scripts')

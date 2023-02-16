@@ -11,9 +11,9 @@
                 <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                 <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
                 <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
-                <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
-                <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
-                <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
+                <input type="hidden" name="kab" value="{{ Auth::user()->kab }}">
+                <input type="hidden" name="kec" value="{{ Auth::user()->kec }}">
+                <input type="hidden" name="desa" value="{{ Auth::user()->desa }}">
                 <div class="form-group">
                     <label for="nama_lembaga">{{ trans('cruds.dataLembaga.fields.nama_lembaga') }}</label>
                     <input class="form-control {{ $errors->has('nama_lembaga') ? 'is-invalid' : '' }}" type="text"
@@ -205,13 +205,15 @@
                 </div>
                 <div class="form-group">
                     <label for="provinsi_id">{{ trans('cruds.dataLembaga.fields.provinsi') }}</label>
-                    <select class="form-control select2 {{ $errors->has('provinsi') ? 'is-invalid' : '' }}"
+                    {{-- <select class="form-control select2 {{ $errors->has('provinsi') ? 'is-invalid' : '' }}"
                         name="provinsi_id" id="provinsi_id">
                         @foreach ($provinsis as $id => $entry)
                             <option value="{{ $id }}" {{ old('provinsi_id') == $id ? 'selected' : '' }}>
                                 {{ $entry }}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
+                    : Yogyakarta
+                    <input type="hidden" name="provinsi_id" value="13">
                     @if ($errors->has('provinsi'))
                         <div class="invalid-feedback">
                             {{ $errors->first('provinsi') }}

@@ -39,15 +39,15 @@ class StoreUserRequest extends FormRequest
                 'integer',
                 'nullable',
             ],
-            'regency_id' => [
+            'kab' => [
                 'integer',
                 'nullable',
             ],
-            'district_id' => [
+            'kec' => [
                 'integer',
                 'nullable',
             ],
-            'village_id' => [
+            'desa' => [
                 'integer',
                 'nullable',
             ],

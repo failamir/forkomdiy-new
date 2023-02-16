@@ -41,15 +41,15 @@ class StoreInstansiRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'regency_id' => [
+            'kab' => [
                 'integer',
                 'nullable',
             ],
-            'district_id' => [
+            'kec' => [
                 'integer',
                 'nullable',
             ],
-            'village_id' => [
+            'desa' => [
                 'integer',
                 'nullable',
             ],

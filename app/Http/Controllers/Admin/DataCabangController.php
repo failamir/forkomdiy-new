@@ -28,30 +28,30 @@ class DataCabangController extends Controller
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
             // where('level_id', Auth::user()->roles->pluck('id')[0])
             // ->where('prov', Auth::user()->prov)
-            // ->where('district_id', Auth::user()->district_id)
+            // ->where('kec', Auth::user()->kec)
             ->get();
         } else if (Auth::user()->roles->pluck('id')[0] == 2) {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
                 // ->where('level_id', Auth::user()->roles->pluck('id')[0])
                 // ->where('prov', Auth::user()->prov)
-                // ->where('regency_id', Auth::user()->regency_id)
-                // ->where('district_id', Auth::user()->district_id)
+                // ->where('kab', Auth::user()->kab)
+                // ->where('kec', Auth::user()->kec)
                 ->get();
         } else if (Auth::user()->roles->pluck('id')[0] == 3) {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
                 // ->where('level_id', Auth::user()->roles->pluck('id')[0])
                 // ->where('prov', Auth::user()->prov)
-                // ->where('regency_id', Auth::user()->regency_id)
-                ->where('regency_id', Auth::user()->regency_id)
-                // ->where('village_id', Auth::user()->village_id)
+                // ->where('kab', Auth::user()->kab)
+                ->where('kab', Auth::user()->kab)
+                // ->where('desa', Auth::user()->desa)
                 ->get();
         } else {
             $dataCabangs = DataCabang::with(['district', 'team', 'media'])
                 ->where('level_id', Auth::user()->roles->pluck('id')[0])
                 ->where('prov', Auth::user()->prov)
-                ->where('regency_id', Auth::user()->regency_id)
-                ->where('district_id', Auth::user()->district_id)
-                ->where('village_id', Auth::user()->village_id)
+                ->where('kab', Auth::user()->kab)
+                ->where('kec', Auth::user()->kec)
+                ->where('desa', Auth::user()->desa)
                 ->get();
         }
         return view('admin.dataCabangs.index', compact('dataCabangs'));

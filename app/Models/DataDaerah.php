@@ -35,14 +35,14 @@ class DataDaerah extends Model implements HasMedia
         'kontak_hp_wa',
         'jumlah_anggota',
         'created_at',
-        'regency_id',
+        'kab',
         'updated_at',
         'deleted_at',
         'team_id',
         'level_id',
         'prov',
-        'district_id',
-        'village_id',
+        'kec',
+        'desa',
         'user_id'
     ];
 
@@ -59,7 +59,7 @@ class DataDaerah extends Model implements HasMedia
 
     public function regency()
     {
-        return $this->belongsTo(Regency::class, 'regency_id');
+        return $this->belongsTo(Regency::class, 'kab');
     }
 
     public function team()

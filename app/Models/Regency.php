@@ -31,7 +31,7 @@ class Regency extends Model
 
     public function regencyDataDaerahs()
     {
-        return $this->hasMany(DataDaerah::class, 'regency_id', 'id');
+        return $this->hasMany(DataDaerah::class, 'kab', 'id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

@@ -24,20 +24,23 @@ class DataRantingController extends Controller
     public function index()
     {
         abort_if(Gate::denies('data_ranting_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        if (Auth::user()->roles->pluck('id')[0] < 5) {
+        if (Auth::user()->roles->pluck('id')[0] == 1) {
+            $dataRantings = DataRanting::with(['village', 'team', 'media'])->get();
+        } elseif (Auth::user()->roles->pluck('id')[0] <= 5) {
             $dataRantings = DataRanting::with(['village', 'team', 'media'])
-            ->where('village_id', Auth::user()->village_id)
-            ->get();
+            ->orwhere('prov', Auth::user()->prov)   
+            ->orwhere('kab', Auth::user()->kab)    
+            ->orwhere('kec', Auth::user()->kec)
+                ->get();
         } else {
             $dataRantings = DataRanting::with(['village', 'team', 'media'])
                 ->where('level_id', Auth::user()->roles->pluck('id')[0])
                 ->where('prov', Auth::user()->prov)
-                ->where('regency_id', Auth::user()->regency_id)
-                ->where('district_id', Auth::user()->district_id)
-                ->where('village_id', Auth::user()->village_id)
+                ->where('kab', Auth::user()->kab)
+                ->where('kec', Auth::user()->kec)
+                ->where('desa', Auth::user()->desa)
                 ->get();
         }
-
 
         return view('admin.dataRantings.index', compact('dataRantings'));
     }
@@ -127,10 +130,10 @@ class DataRantingController extends Controller
     {
         abort_if(Gate::denies('data_ranting_create') && Gate::denies('data_ranting_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model         = new DataRanting();
-        $model->id     = $request->input('crud_id', 0);
+        $model = new DataRanting();
+        $model->id = $request->input('crud_id', 0);
         $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

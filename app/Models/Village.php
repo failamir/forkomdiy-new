@@ -31,7 +31,7 @@ class Village extends Model
 
     public function villageDataRantings()
     {
-        return $this->hasMany(DataRanting::class, 'village_id', 'id');
+        return $this->hasMany(DataRanting::class, 'desa', 'id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

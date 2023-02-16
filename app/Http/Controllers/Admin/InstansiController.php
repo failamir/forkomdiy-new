@@ -21,14 +21,17 @@ class InstansiController extends Controller
     {
         abort_if(Gate::denies('instansi_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $instansis = Instansi::with(['team'])
-        ->where('level_id',Auth::user()->roles->pluck('id')[0])
-        ->where('prov', Auth::user()->prov)
-        ->where('regency_id', Auth::user()->regency_id)
-        ->where('district_id', Auth::user()->district_id)
-        ->where('village_id', Auth::user()->village_id)
-        ->get();
-
+        if (Auth::user()->roles->pluck('id')[0] == 1) {
+            $instansis = Instansi::with(['team'])->get();
+        } else {
+            $instansis = Instansi::with(['team'])
+                ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                ->where('prov', Auth::user()->prov)
+                ->where('kab', Auth::user()->kab)
+                ->where('kec', Auth::user()->kec)
+                ->where('desa', Auth::user()->desa)
+                ->get();
+        }
         return view('admin.instansis.index', compact('instansis'));
     }
 

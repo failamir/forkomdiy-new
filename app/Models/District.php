@@ -31,7 +31,7 @@ class District extends Model
 
     public function districtDataCabangs()
     {
-        return $this->hasMany(DataCabang::class, 'district_id', 'id');
+        return $this->hasMany(DataCabang::class, 'kec', 'id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

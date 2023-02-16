@@ -12,9 +12,9 @@
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
             <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
-            <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
-            <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
-            <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
+            <input type="hidden" name="kab" value="{{ Auth::user()->kab }}">
+            <input type="hidden" name="kec" value="{{ Auth::user()->kec }}">
+            <input type="hidden" name="desa" value="{{ Auth::user()->desa }}">
             <div class="form-group">
                 <label for="company_name">{{ trans('cruds.instansi.fields.company_name') }}</label>
                 <input class="form-control {{ $errors->has('company_name') ? 'is-invalid' : '' }}" type="text" name="company_name" id="company_name" value="{{ old('company_name', '') }}">

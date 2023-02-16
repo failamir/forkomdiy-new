@@ -12,9 +12,9 @@
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <input type="hidden" name="level_id" value="{{ Auth::user()->roles->pluck('id')[0] }}">
             <input type="hidden" name="prov" value="{{ Auth::user()->prov }}">
-            <input type="hidden" name="regency_id" value="{{ Auth::user()->regency_id }}">
-            <input type="hidden" name="district_id" value="{{ Auth::user()->district_id }}">
-            <input type="hidden" name="village_id" value="{{ Auth::user()->village_id }}">
+            <input type="hidden" name="kab" value="{{ Auth::user()->kab }}">
+            <input type="hidden" name="kec" value="{{ Auth::user()->kec }}">
+            <input type="hidden" name="desa" value="{{ Auth::user()->desa }}">
             <div class="form-group">
                 <label for="nama_stakeholder">{{ trans('cruds.dataKerjaSama.fields.nama_stakeholder') }}</label>
                 <input class="form-control {{ $errors->has('nama_stakeholder') ? 'is-invalid' : '' }}" type="text" name="nama_stakeholder" id="nama_stakeholder" value="{{ old('nama_stakeholder', '') }}">
@@ -23,7 +23,7 @@
                         {{ $errors->first('nama_stakeholder') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.nama_stakeholder_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.nama_stakeholder_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="jangkauan_kerjasama">{{ trans('cruds.dataKerjaSama.fields.jangkauan_kerjasama') }}</label>
@@ -33,7 +33,7 @@
                         {{ $errors->first('jangkauan_kerjasama') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.jangkauan_kerjasama_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.jangkauan_kerjasama_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="lampiran">{{ trans('cruds.dataKerjaSama.fields.lampiran') }}</label>
@@ -44,7 +44,7 @@
                         {{ $errors->first('lampiran') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.lampiran_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.lampiran_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="jenis_kerjasama">{{ trans('cruds.dataKerjaSama.fields.jenis_kerjasama') }}</label>
@@ -54,7 +54,7 @@
                         {{ $errors->first('jenis_kerjasama') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.jenis_kerjasama_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.jenis_kerjasama_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="mulai_kerjasama">{{ trans('cruds.dataKerjaSama.fields.mulai_kerjasama') }}</label>
@@ -64,7 +64,7 @@
                         {{ $errors->first('mulai_kerjasama') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.mulai_kerjasama_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.mulai_kerjasama_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="frekuensi_kerjasama">{{ trans('cruds.dataKerjaSama.fields.frekuensi_kerjasama') }}</label>
@@ -74,7 +74,7 @@
                         {{ $errors->first('frekuensi_kerjasama') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.frekuensi_kerjasama_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.frekuensi_kerjasama_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="no_hp_wa_lembaga">{{ trans('cruds.dataKerjaSama.fields.no_hp_wa_lembaga') }}</label>
@@ -84,7 +84,7 @@
                         {{ $errors->first('no_hp_wa_lembaga') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.no_hp_wa_lembaga_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.no_hp_wa_lembaga_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="kontak_di_lembaga">{{ trans('cruds.dataKerjaSama.fields.kontak_di_lembaga') }}</label>
@@ -94,7 +94,7 @@
                         {{ $errors->first('kontak_di_lembaga') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.kontak_di_lembaga_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.kontak_di_lembaga_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="no_hp_wa_stakeholder">{{ trans('cruds.dataKerjaSama.fields.no_hp_wa_stakeholder') }}</label>
@@ -104,7 +104,7 @@
                         {{ $errors->first('no_hp_wa_stakeholder') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.no_hp_wa_stakeholder_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.no_hp_wa_stakeholder_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <label for="nama_lembaga_kerjasama">{{ trans('cruds.dataKerjaSama.fields.nama_lembaga_kerjasama') }}</label>
@@ -114,7 +114,7 @@
                         {{ $errors->first('nama_lembaga_kerjasama') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.dataKerjaSama.fields.nama_lembaga_kerjasama_helper') }}</span>
+                <span class="help-block" style="font-size:12px">{{ trans('cruds.dataKerjaSama.fields.nama_lembaga_kerjasama_helper') }}</span><br><br>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

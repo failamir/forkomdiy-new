@@ -24,14 +24,22 @@ class PerizinanController extends Controller
     {
         abort_if(Gate::denies('perizinan_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $perizinans = Perizinan::with(['team', 'media'])
-        ->where('level_id',Auth::user()->roles->pluck('id')[0])
-        ->where('prov', Auth::user()->prov)
-        ->where('regency_id', Auth::user()->regency_id)
-        ->where('district_id', Auth::user()->district_id)
-        ->where('village_id', Auth::user()->village_id)
-        ->get();
-
+        if (Auth::user()->roles->pluck('id')[0] == 1) {
+            $perizinans = Perizinan::with(['team', 'media'])->get();
+        }else if(Auth::user()->roles->pluck('id')[0] <= 5){
+            $perizinans = Perizinan::with(['team', 'media'])
+                // ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                ->where('team_id', Auth::user()->team->id)
+                ->get();
+        } else {
+            $perizinans = Perizinan::with(['team', 'media'])
+                ->where('level_id', Auth::user()->roles->pluck('id')[0])
+                ->where('prov', Auth::user()->prov)
+                ->where('kab', Auth::user()->kab)
+                ->where('kec', Auth::user()->kec)
+                ->where('desa', Auth::user()->desa)
+                ->get();
+        }
         return view('admin.perizinans.index', compact('perizinans'));
     }
 
@@ -116,10 +124,10 @@ class PerizinanController extends Controller
     {
         abort_if(Gate::denies('perizinan_create') && Gate::denies('perizinan_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model         = new Perizinan();
-        $model->id     = $request->input('crud_id', 0);
+        $model = new Perizinan();
+        $model->id = $request->input('crud_id', 0);
         $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

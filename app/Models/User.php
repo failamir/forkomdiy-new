@@ -55,9 +55,9 @@ class User extends Authenticatable
         'deleted_at',
         'team_id',
         'prov',
-        'regency_id',
-        'district_id',
-        'village_id',
+        'kab',
+        'kec',
+        'desa',
     ];
 
     public function __construct(array $attributes = [])
@@ -106,6 +106,26 @@ class User extends Authenticatable
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Province::class, 'prov');
+    }
+
+    public function kabupaten()
+    {
+        return $this->belongsTo(Regency::class, 'kab');
+    }
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(District::class, 'kec');
+    }
+
+    public function desaa()
+    {
+        return $this->belongsTo(Village::class, 'desa');
     }
 
     protected function serializeDate(DateTimeInterface $date)
