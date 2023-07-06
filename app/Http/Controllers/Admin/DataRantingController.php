@@ -88,7 +88,17 @@ class DataRantingController extends Controller
     public function update(UpdateDataRantingRequest $request, DataRanting $dataRanting)
     {
         $dataRanting->update($request->all());
-
+        
+        // $dataRanting->prov = $village->prov;
+        // $dataRanting->kab = $village->kab;
+        // $dataRanting->kec = $village->kec;
+        // $dataRanting->desa = $village->desa;
+        var_dump($request->desa);
+        $village= Village::where('id', $request->input('desa'))->update(['node'=>1]);
+        // $village->save();
+        $village = Village::where('id', $request->input('desa'))->first();
+        var_dump($village);
+        die;
         if (count($dataRanting->lampiran) > 0) {
             foreach ($dataRanting->lampiran as $media) {
                 if (!in_array($media->file_name, $request->input('lampiran', []))) {

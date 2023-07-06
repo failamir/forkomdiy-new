@@ -10,7 +10,7 @@
         <form method="POST" action="{{ route("admin.data-rantings.update", [$dataRanting->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="desa">{{ trans('cruds.dataRanting.fields.village') }}</label>
                 <select class="form-control select2 {{ $errors->has('village') ? 'is-invalid' : '' }}" name="desa" id="desa">
                     @foreach($villages as $id => $entry)
@@ -23,7 +23,10 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.dataRanting.fields.village_helper') }}</span>
-            </div>
+            </div> --}}
+            {{-- {{ 'asdasdas' }}
+            {{ $dataRanting->desa }} --}}
+            <input type="hidden" value="{{ $dataRanting->desa }}" name="desa" id="desa">
             <div class="form-group">
                 <label for="nama_ketua">{{ trans('cruds.dataRanting.fields.nama_ketua') }}</label>
                 <input class="form-control {{ $errors->has('nama_ketua') ? 'is-invalid' : '' }}" type="text" name="nama_ketua" id="nama_ketua" value="{{ old('nama_ketua', $dataRanting->nama_ketua) }}">
